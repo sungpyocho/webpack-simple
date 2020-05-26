@@ -1,7 +1,6 @@
-// webpack.config.js
-// webpack 명령은 기본적으로 이 설정으로 시작
+// webpack.common.js
+// dev, prod 둘다 쓰게 되는 common 설정
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // mini-css-extract-plugin 로드
 
 module.exports = {
   entry: {
@@ -16,16 +15,13 @@ module.exports = {
         use: ["html-loader"],
       },
       {
-        // html-loader에서 이미지 만나면 file-loader가 담당
+        // html-loader에서 이미지 만나면 file-loader가 담당할게!
         test: /\.(png|jpe?g|gif|svg)$/,
         use: {
-          // Using file-loader for these files
           loader: "file-loader",
-          // In options we can set different things like format
-          // and directory to save
           options: {
             name: "[name].[hash].[ext]",
-            outputPath: "images", // dist 속 이미지 파일이 저장될 폴더 이름
+            outputPath: "images", // dist 폴더 속 이미지가 저장될 곳
           },
         },
       },
