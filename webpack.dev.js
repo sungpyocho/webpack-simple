@@ -3,7 +3,6 @@
 const path = require("path");
 const common = require("./webpack.common");
 const merge = require("webpack-merge");
-// const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // mini-css-extract-plugin 로드
 
 module.exports = merge(common, {
   // 웹팩 v4부터는 mode 필수
@@ -15,7 +14,19 @@ module.exports = merge(common, {
     // __dirname 은 node 에서 제공하는 node 파일의 경로를 담고 있는 변수
     // __이 붙어 있는 변수들은 항상 무엇인가를 담고있는 특별한 변수들임
     // path 에는 절대 경로 설정(절대값으로 static(정적)으로 사용)
-    filename: "bundle.js", // 번들링 된 결과 파일의 이름
+    filename: "[name].bundle.js", // 번들링 된 결과 파일의 이름
     path: path.resolve(__dirname, "dist"),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader", // 3. style을 DOM에 삽입
+          "css-loader", // 2. CSS -> CommonJS 변환
+          "sass-loader", // 1. SASS -> CSS 변환
+        ], //역순이라는 것을 기억하자.
+      },
+    ],
   },
 });
