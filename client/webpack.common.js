@@ -10,6 +10,18 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/, // 확장자가 .js일때
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              // plugin을 모아놓은 preset인 preset-env를 사용. 얘가 ES5코드로 변환해줌.
+              presets: ["@babel/preset-env"],
+            },
+          },
+        ],
+      },
+      {
         // html 파일은 내가 처리할게!
         test: /\.html$/,
         use: ["html-loader"],

@@ -27,4 +27,9 @@ module.exports = merge(common, {
       },
     ],
   },
+  devServer: {
+    proxy: {
+      "/api": "http://localhost:5000",
+    },
+  },
 });

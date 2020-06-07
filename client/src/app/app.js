@@ -1,7 +1,18 @@
 import { inputsAreValid } from "./utils/inputs-are-valid";
 import { parseInputs } from "./utils/parse-input";
+import axios from "axios";
+
 export const run = (alertService, componentService) => {
   alertService.hideErrors();
+
+  axios
+    .get("/api/hello")
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   componentService.onClick(() => {
     alertService.hideErrors();
